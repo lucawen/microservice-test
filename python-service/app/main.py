@@ -8,6 +8,8 @@ from app.models import base as models
 from app.schemas import base as schemas
 from app.db.base import SessionLocal, engine
 
+from app.utils import request_to_rust
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -35,7 +37,11 @@ def read_microservice(
     db_request = crud.get_request_by_key(
         db, key_data=response_obj.key_data)
     if not db_request:
-        return {"key_data": "World", "id": 1}
-        # call go microservice
-        # return crud.create_user(db=db, user=user)
-    return {"key_data": "World", "id": 1}
+        content = request_to_rust()
+        if content:
+            request_obj = schemas.RequestStorage(
+                data_service=content, key_data=response_obj.key_data)
+            return crud.create_request(db, request_obj=request_obj)
+        else:
+            raise HTTPException(status_code=500, detail="Error when try to proccess you request")
+    return db_request
