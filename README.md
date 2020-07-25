@@ -2,8 +2,8 @@
 
 A microservice that make a request to another microservice and store their data into storage for caching
 
-API A: python-service
-API B: rust-service
+- API A: python-service
+- API B: rust-service
 
 I made the rust-service like a service maded from another person, like if i don't know very well
 
