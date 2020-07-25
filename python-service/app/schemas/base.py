@@ -1,6 +1,6 @@
-from typing import Optional
+from typing import Optional, Any
 
-from pydantic import BaseModel, Json
+from pydantic import BaseModel
 
 
 class RequestStorageRequestBase(BaseModel):
@@ -8,7 +8,7 @@ class RequestStorageRequestBase(BaseModel):
 
 
 class RequestStorageBase(BaseModel):
-    data_service: Json
+    data_service: Any
     key_data: str
 
 
