@@ -2,9 +2,17 @@
 
 A microservice that make a request to another microservice and store their data into storage for caching
 
+API A: python-service
+API B: rust-service
+
+I made the rust-service like a service maded from another person, like if i don't know very well
+
+The api A make a request to api B and store the value from api B into databases in the layer of api A.
+If already have a request to something that already have proccessed, will return the cached value from database
+
 ## Documentation
 
-The documentation for python-service its located under /docs on 127.0.0.1:8000
+The documentation for python-service (api A) its located under /docs on 127.0.0.1:8000
 
 ## Usage
 
