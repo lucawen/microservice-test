@@ -1,0 +1,15 @@
+version: '3'
+services:
+  rust_api:
+    build: ./rust-service
+    ports:
+      - "8088:8088"
+  python_api:
+    build: ./python-service
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    environment:
+        - microservice_api=http://rust_api:8088
+    depends_on:
+      - rust_api
